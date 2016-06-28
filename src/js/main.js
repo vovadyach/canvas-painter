@@ -4,59 +4,66 @@
  */
 
 function onReady() {
-    var canvas = document.getElementById("canvas-1"),
-        context = canvas.getContext("2d"),
-        rect = canvas.getBoundingClientRect(),
-        mouseX,
-        mouseY;
+    var buttonnode = document.createElement('input');
+          buttonnode.setAttribute('class', 'red');
+          buttonnode.setAttribute('data-color', '#ff0000');
+          buttonnode.setAttribute('type','button');
+          buttonnode.setAttribute('value','Red');
+          document.body.appendChild(buttonnode);
 
-    var colorPurple = "#cb3594";
-    var colorGreen = "#659b41";
-    var colorYellow = "#ffcf33";
-    var colorBrawn = "#986928";
+          var buttonnode = document.createElement('input');
+          buttonnode.setAttribute('class', 'green');
+          buttonnode.setAttribute('data-color', '#3dae49');
+          buttonnode.setAttribute('type','button');
+          buttonnode.setAttribute('value','Green');
+          document.body.appendChild(buttonnode);
 
-    var curColor = colorPurple;
-    var clickColor = new Array();
+          var buttonnode = document.createElement('input');
+          buttonnode.setAttribute('class', 'blue');
+          buttonnode.setAttribute('data-color', '#009cc5');
+          buttonnode.setAttribute('type','button');
+          buttonnode.setAttribute('value','Blue');
+          document.body.appendChild(buttonnode);
 
-    function addClick(x, y, dragging)
-    {
-        clickX.push(x);
-        clickY.push(y);
-        clickDrag.push(dragging);
-        clickColor.push(curColor);
-    }
+          var clearBox = document.createElement('div');
+          clearBox.setAttribute('id', 'clear-box');
+          document.body.appendChild(clearBox);
+          
+          var clearBtn = document.createElement('input');
+          clearBtn.setAttribute('id', 'clear');
+          clearBtn.setAttribute('type','button');
+          clearBtn.setAttribute('value','Clear');
+          document.body.appendChild(clearBtn);
 
-    function redraw(){
-        /* context.strokeStyle = "#df4b26"; */
-        context.lineJoin = "round";
-        context.lineWidth = 5;
+          var canvas = document.createElement('canvas');
+          var widthCanv = 1200;
+          var heightCanv = 640;
 
-        for(var i=0; i < clickX.length; i++)
-        {
-            context.beginPath();
-            if(clickDrag[i] && i){
-                contex.moveTo(clickX[i-1], clickY[i-1]);
-            }else{
-                context.moveTo(clickX[i]-1, clickY[i]);
-            }
-            context.lineTo(clickX[i], clickY[i]);
-            context.closePath();
-            context.strokeStyle = clickColor[i];
-            context.stroke();
-        }
-    }
-    canvas.addEventListener("mousedown", onMouseDown);
-    function onMouseDown(event) {
-        var mouseX = e.pageX - this.offsetLeft;
-        var mouseY = e.pageY - this.offsetTop;
+          canv.id = 'someId';
+          document.body.appendChild(canvas);
+          
+          canv.width = widthCanv;
+          canv.height = heightCanv;
+    
+        var rect = canvas.getBoundingClientRect();
+        var mouseX;
+        var mouseY;
 
-        paint = true;
-        addClick(e.pageX - this.offsetLeft, e.pageY - this.offsetTop);
-        redraw();
-    };
+          
+          var context = canv.getContext("2d");
+          context.beginPath();
+          context.strokeRect(12,20,1185, 600);
 
+          //Places clear button inside a div  
+          var generateHere = document.getElementById("clear-box");
+          generateHere.insertBefore(clearBtn, generateHere.firstChild);
 
-    /*canvas.addEventListener("mousedown", onMouseDown);
+          // context.canv.setAttribute("id", "canvasID");
+          var red = document.getElementsByClassName('red');
+          var green = document.getElementsByClassName('green');
+          var blue = document.getElementsByClassName('blue');
+        
+            canvas.addEventListener("mousedown", onMouseDown);
 
     function onMouseDown(event) {
         mouseX = event.clientX - rect.left;
@@ -77,7 +84,7 @@ function onReady() {
     function onMouseUp(event) {
         canvas.removeEventListener("mousemove", onMouseMove);
         document.body.removeEventListener( 'mouseup', onMouseUp);
-    }*/
+    }
 }
 window.onload = onReady;
 
