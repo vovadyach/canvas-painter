@@ -4,105 +4,161 @@
 
 function onReady() {
 
-  var buttonnode1 = document.createElement('input');
-  buttonnode1.setAttribute('class', 'colors');
-  buttonnode1.setAttribute('data-color', '#ff0000');
-  buttonnode1.setAttribute('type','button');
-  buttonnode1.setAttribute('value','Red');
-  document.body.appendChild(buttonnode1);
+    var buttonnode1 = document.createElement('input');
+    buttonnode1.setAttribute('class', 'colors');
+    buttonnode1.setAttribute('data-color', '#c82124');
+    buttonnode1.setAttribute('type','button');
+    buttonnode1.setAttribute('value','Red');
+    document.body.appendChild(buttonnode1);
 
-  var buttonnode2 = document.createElement('input');
-  buttonnode2.setAttribute('class', 'colors');
-  buttonnode2.setAttribute('data-color', '#3dae49');
-  buttonnode2.setAttribute('type','button');
-  buttonnode2.setAttribute('value','Green');
-  document.body.appendChild(buttonnode2);
+    var buttonnode2 = document.createElement('input');
+    buttonnode2.setAttribute('class', 'colors');
+    buttonnode2.setAttribute('data-color', '#3dae49');
+    buttonnode2.setAttribute('type','button');
+    buttonnode2.setAttribute('value','Green');
+    document.body.appendChild(buttonnode2);
 
-  var buttonnode3 = document.createElement('input');
-  buttonnode3.setAttribute('class', 'colors');
-  buttonnode3.setAttribute('data-color', '#009cc5');
-  buttonnode3.setAttribute('type','button');
-  buttonnode3.setAttribute('value','Blue');
-  document.body.appendChild(buttonnode3);
+    var buttonnode3 = document.createElement('input');
+    buttonnode3.setAttribute('class', 'colors');
+    buttonnode3.setAttribute('data-color', '#009cc5');
+    buttonnode3.setAttribute('type','button');
+    buttonnode3.setAttribute('value','Blue');
+    document.body.appendChild(buttonnode3);
 
-  var clearBtn = document.createElement('input');
-  clearBtn.setAttribute('id', 'clear');
-  clearBtn.setAttribute('type','button');
-  clearBtn.setAttribute('value','Clear');
-  document.body.appendChild(clearBtn);
+    var clearBtn = document.createElement('input');
+    clearBtn.setAttribute('id', 'clear');
+    clearBtn.setAttribute('type','button');
+    clearBtn.setAttribute('value','Clear');
+    document.body.appendChild(clearBtn);
 
-  var element = document.createElement("div");
-  element.setAttribute('class', 'color-input');
-  document.getElementsByClassName('container')[0].appendChild(element);
+    var element = document.createElement("div");
+    element.setAttribute('class', 'color-input');
+    document.getElementsByClassName('container')[0].appendChild(element);
 
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode1);
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode2);
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode3);
-  document.getElementsByClassName('color-input')[0].appendChild(clearBtn);
+    document.getElementsByClassName('color-input')[0].appendChild(buttonnode1);
+    document.getElementsByClassName('color-input')[0].appendChild(buttonnode2);
+    document.getElementsByClassName('color-input')[0].appendChild(buttonnode3);
+    document.getElementsByClassName('color-input')[0].appendChild(clearBtn);
 
-  var canvas = document.getElementById('canvas');
-  var rect = canvas.getBoundingClientRect(),
-      mouseX,
-      mouseY,
-      context = canvas.getContext("2d");
-
-  //Set color vars
-  var red = '#c82124',
-      green = '#3dae49',
-      blue = '#009cc5';
-
-  var inputColors = document.getElementsByClassName('colors');
-  inputColors.onclick = function (event) {
-    console.log(event.target.dataset.color);
-  };
-  //inputColors.addEventListener('click', function(event){
-  //  console.log(event.target.dataset.color);
-  //});
-
-  //for (var i = 0; i < inputColors.length; i++) {
-  //  inputColors.addEventListener('click', getAlert);
-  //}
+    var canvas = document.getElementById('canvas');
+    var rect = canvas.getBoundingClientRect(),
+        mouseX,
+        mouseY,
+        context = canvas.getContext("2d");
 
 
+    //Set color vars
+    var red = '#c82124',
+        green = '#3dae49',
+        blue = '#009cc5';
 
-  function setColor(color) {
-    if (color === red ) {
-      return context.strokeStyle = red;
-    } else if(color === green) {
-      return context.strokeStyle = green;
-    } else if (color === blue) {
-      return context.strokeStyle = blue;
-    } else {
-      return false;
+    var clearButton = document.getElementById('clear');
+    clearCanvasArea(clearButton);
+
+    var inputColors = document.getElementsByClassName('colors');
+    getColor(inputColors);
+
+    function clearCanvasArea(btn) {
+        return btn.onclick = function () {
+            context.clearRect(0,0,1400, 800);
+        };
     }
-  }
 
-  canvas.addEventListener("mousedown", onMouseDown);
+    function getColor(colors) {
+        for (var i = 0, len = colors.length; i < len; i++) {
+            colors[i].onclick = function (event) {
+                return myFunction(event);
+            };
+        }
+    }
 
-  function onMouseDown(event) {
-    mouseX = event.clientX - rect.left;
-    mouseY = event.clientY - rect.top;
-    canvas.addEventListener("mousemove", onMouseMove);
-    document.body.addEventListener('mouseup', onMouseUp);
-  }
+    function myFunction(event) {
+        var color = event.target.dataset.color;
+        if (color === red) {
+             setColor(red);
+        } else if (color === green) {
+            setColor(green);
+            alert(color);
+        } else if (color === blue) {
+            setColor(blue);
+            alert(color);
+        }
+    }
 
-  function onMouseMove(event) {
-    context.beginPath();
-    context.moveTo(mouseX, mouseY);
-    mouseX = event.clientX - rect.left;
-    mouseY = event.clientY - rect.top;
-    setColor(blue);
-    context.lineTo(mouseX, mouseY);
-    context.lineWidth = 5;
-    context.stroke();
-  }
+    function setColor(color) {
+        if (color === red ) {
+            return context.strokeStyle = red;
+        } else if(color === green) {
+            return context.strokeStyle = green;
+        } else if (color === blue) {
+            return context.strokeStyle = blue;
+        } else {
+            return false;
+        }
+    }
 
-  function onMouseUp(event) {
-    canvas.removeEventListener("mousemove", onMouseMove);
-    document.body.removeEventListener( 'mouseup', onMouseUp);
-  }
+    canvas.addEventListener("mousedown", onMouseDown);
+
+    function onMouseDown(event) {
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+        canvas.addEventListener("mousemove", onMouseMove);
+        document.body.addEventListener('mouseup', onMouseUp);
+    }
+
+    function onMouseMove(event) {
+        context.beginPath();
+        context.moveTo(mouseX, mouseY);
+        mouseX = event.clientX - rect.left;
+        mouseY = event.clientY - rect.top;
+        setColor(red);
+        context.lineTo(mouseX, mouseY);
+        context.lineWidth = 3;
+        context.stroke();
+    }
+
+    function onMouseUp(event) {
+        canvas.removeEventListener("mousemove", onMouseMove);
+        document.body.removeEventListener( 'mouseup', onMouseUp);
+    }
 }
 window.onload = onReady;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /*"use strict";
  var context = document.getElementById('sheet').getContext("2d");
