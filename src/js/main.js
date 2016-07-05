@@ -75,13 +75,11 @@ function onReady() {
     function myFunction(event) {
         var color = event.target.dataset.color;
         if (color === red) {
-             setColor(red);
+            return alert(color);
         } else if (color === green) {
-            setColor(green);
-            alert(color);
+            return alert(color);
         } else if (color === blue) {
-            setColor(blue);
-            alert(color);
+           return alert(color);
         }
     }
 
