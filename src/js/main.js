@@ -47,7 +47,7 @@ function onReady() {
         context = canvas.getContext("2d");
 
 
-    //Set color vars
+    //Set colors
     var red = '#c82124',
         green = '#3dae49',
         blue = '#009cc5';
@@ -58,35 +58,28 @@ function onReady() {
     var inputColors = document.getElementsByClassName('colors');
     getColor(inputColors);
 
+    canvas.addEventListener("mousedown", onMouseDown);
+
     function clearCanvasArea(btn) {
         return btn.onclick = function () {
             context.clearRect(0,0,1400, 800);
+            context.strokeStyle = '#000';
         };
     }
 
     function getColor(colors) {
         for (var i = 0, len = colors.length; i < len; i++) {
             colors[i].onclick = function (event) {
-                return myFunction(event);
+                return setColor(event);
             };
         }
     }
 
-    function myFunction(event) {
-        var color = event.target.dataset.color;
-        if (color === red) {
-            return alert(color);
-        } else if (color === green) {
-            return alert(color);
-        } else if (color === blue) {
-           return alert(color);
-        }
-    }
-
     function setColor(color) {
-        if (color === red ) {
+         color = event.target.dataset.color;
+        if (color === red) {
             return context.strokeStyle = red;
-        } else if(color === green) {
+        } else if (color === green) {
             return context.strokeStyle = green;
         } else if (color === blue) {
             return context.strokeStyle = blue;
@@ -94,8 +87,6 @@ function onReady() {
             return false;
         }
     }
-
-    canvas.addEventListener("mousedown", onMouseDown);
 
     function onMouseDown(event) {
         mouseX = event.clientX - rect.left;
