@@ -4,112 +4,101 @@
 
 function onReady() {
 
-    var buttonnode1 = document.createElement('input');
-    buttonnode1.setAttribute('class', 'colors');
-    buttonnode1.setAttribute('data-color', '#c82124');
-    buttonnode1.setAttribute('type','button');
-    buttonnode1.setAttribute('value','Red');
-    document.body.appendChild(buttonnode1);
+  var buttonnode1 = document.createElement('input');
+  buttonnode1.setAttribute('class', 'colors');
+  buttonnode1.setAttribute('data-color', '#c82124');
+  buttonnode1.setAttribute('type','button');
+  buttonnode1.setAttribute('value','Red');
+  document.body.appendChild(buttonnode1);
 
-    var buttonnode2 = document.createElement('input');
-    buttonnode2.setAttribute('class', 'colors');
-    buttonnode2.setAttribute('data-color', '#3dae49');
-    buttonnode2.setAttribute('type','button');
-    buttonnode2.setAttribute('value','Green');
-    document.body.appendChild(buttonnode2);
+  var buttonnode2 = document.createElement('input');
+  buttonnode2.setAttribute('class', 'colors');
+  buttonnode2.setAttribute('data-color', '#3dae49');
+  buttonnode2.setAttribute('type','button');
+  buttonnode2.setAttribute('value','Green');
+  document.body.appendChild(buttonnode2);
 
-    var buttonnode3 = document.createElement('input');
-    buttonnode3.setAttribute('class', 'colors');
-    buttonnode3.setAttribute('data-color', '#009cc5');
-    buttonnode3.setAttribute('type','button');
-    buttonnode3.setAttribute('value','Blue');
-    document.body.appendChild(buttonnode3);
+  var buttonnode3 = document.createElement('input');
+  buttonnode3.setAttribute('class', 'colors');
+  buttonnode3.setAttribute('data-color', '#009cc5');
+  buttonnode3.setAttribute('type','button');
+  buttonnode3.setAttribute('value','Blue');
+  document.body.appendChild(buttonnode3);
 
-    var clearBtn = document.createElement('input');
-    clearBtn.setAttribute('id', 'clear');
-    clearBtn.setAttribute('type','button');
-    clearBtn.setAttribute('value','Clear');
-    document.body.appendChild(clearBtn);
+  var clearBtn = document.createElement('input');
+  clearBtn.setAttribute('id', 'clear');
+  clearBtn.setAttribute('type','button');
+  clearBtn.setAttribute('value','Clear');
+  document.body.appendChild(clearBtn);
 
-    var element = document.createElement("div");
-    element.setAttribute('class', 'color-input');
-    document.getElementsByClassName('container')[0].appendChild(element);
+  var element = document.createElement("div");
+  element.setAttribute('class', 'color-input');
+  document.getElementsByClassName('container')[0].appendChild(element);
 
-    document.getElementsByClassName('color-input')[0].appendChild(buttonnode1);
-    document.getElementsByClassName('color-input')[0].appendChild(buttonnode2);
-    document.getElementsByClassName('color-input')[0].appendChild(buttonnode3);
-    document.getElementsByClassName('color-input')[0].appendChild(clearBtn);
+  document.getElementsByClassName('color-input')[0].appendChild(buttonnode1);
+  document.getElementsByClassName('color-input')[0].appendChild(buttonnode2);
+  document.getElementsByClassName('color-input')[0].appendChild(buttonnode3);
+  document.getElementsByClassName('color-input')[0].appendChild(clearBtn);
 
-    var canvas = document.getElementById('canvas');
-    var rect = canvas.getBoundingClientRect(),
-        mouseX,
-        mouseY,
-        context = canvas.getContext("2d");
+  var canvas = document.getElementById('canvas');
+  var rect = canvas.getBoundingClientRect(),
+      mouseX,
+      mouseY,
+      context = canvas.getContext("2d"),
+      color;
 
 
-    //Set colors
-    var red = '#c82124',
-        green = '#3dae49',
-        blue = '#009cc5';
+  var clearButton = document.getElementById('clear');
+  clearButton.onclick = clearCanvasArea;
 
-    var clearButton = document.getElementById('clear');
-    clearCanvasArea(clearButton);
+  function clearCanvasArea() {
+    context.clearRect(0,0,1400, 800);
+    context.strokeStyle = '#000';
+  }
 
-    var inputColors = document.getElementsByClassName('colors');
-    getColor(inputColors);
+  var inputColors = document.getElementsByClassName('colors');
+  getColor(inputColors);
 
-    canvas.addEventListener("mousedown", onMouseDown);
+  canvas.addEventListener("mousedown", onMouseDown);
 
-    function clearCanvasArea(btn) {
-        return btn.onclick = function () {
-            context.clearRect(0,0,1400, 800);
-            context.strokeStyle = '#000';
-        };
+
+  function getColor(colors) {
+    for (var i = 0, len = colors.length; i < len; i++) {
+      colors[i].onclick = function (event) {
+        return setColor(event);
+      };
     }
+  }
 
-    function getColor(colors) {
-        for (var i = 0, len = colors.length; i < len; i++) {
-            colors[i].onclick = function (event) {
-                return setColor(event);
-            };
-        }
+  function setColor(color) {
+    color = event.target.dataset.color;
+    if (color) {
+      context.strokeStyle = color;
     }
+  }
 
-    function setColor(color) {
-         color = event.target.dataset.color;
-        if (color === red) {
-            return context.strokeStyle = red;
-        } else if (color === green) {
-            return context.strokeStyle = green;
-        } else if (color === blue) {
-            return context.strokeStyle = blue;
-        } else {
-            return false;
-        }
-    }
+  function onMouseDown(event) {
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+    canvas.addEventListener("mousemove", onMouseMove);
+    document.body.addEventListener('mouseup', onMouseUp);
+  }
 
-    function onMouseDown(event) {
-        mouseX = event.clientX - rect.left;
-        mouseY = event.clientY - rect.top;
-        canvas.addEventListener("mousemove", onMouseMove);
-        document.body.addEventListener('mouseup', onMouseUp);
-    }
+  function onMouseMove(event) {
+    context.beginPath();
+    context.moveTo(mouseX, mouseY);
+    mouseX = event.clientX - rect.left;
+    mouseY = event.clientY - rect.top;
+    setColor(color);
+    context.lineTo(mouseX, mouseY);
+    context.lineWidth = 3;
+    context.stroke();
+  }
 
-    function onMouseMove(event) {
-        context.beginPath();
-        context.moveTo(mouseX, mouseY);
-        mouseX = event.clientX - rect.left;
-        mouseY = event.clientY - rect.top;
-        setColor(red);
-        context.lineTo(mouseX, mouseY);
-        context.lineWidth = 3;
-        context.stroke();
-    }
-
-    function onMouseUp(event) {
-        canvas.removeEventListener("mousemove", onMouseMove);
-        document.body.removeEventListener( 'mouseup', onMouseUp);
-    }
+  function onMouseUp(event) {
+    canvas.removeEventListener("mousemove", onMouseMove);
+    document.body.removeEventListener( 'mouseup', onMouseUp);
+  }
 }
 window.onload = onReady;
 
