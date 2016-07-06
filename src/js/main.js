@@ -65,7 +65,7 @@ function onReady() {
   function getColor(colors) {
     for (var i = 0, len = colors.length; i < len; i++) {
       colors[i].onclick = function (event) {
-        return setColor(event);
+        setColor(event);
       };
     }
   }
@@ -100,6 +100,7 @@ function onReady() {
     document.body.removeEventListener( 'mouseup', onMouseUp);
   }
 }
+
 window.onload = onReady;
 
 
