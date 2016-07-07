@@ -39,7 +39,7 @@ function onReady() {
   colorInput.appendChild(buttonnode1);
   colorInput.appendChild(buttonnode2);
   colorInput.appendChild(buttonnode3);
-  colorInput.appendChild(clearBtn);
+  //colorInput.appendChild(clearBtn);
 
   var canvas = document.getElementById('canvas');
   var rect = canvas.getBoundingClientRect(),
@@ -56,37 +56,24 @@ function onReady() {
     //context.strokeStyle = '#000';
   }
 
-  var inputColors = document.getElementsByClassName('colors');
-  getColor(inputColors);
-
-  function getColor(colors) {
-    for (var i = 0, len = colors.length; i < len; i++) {
-      colors[i].onclick = function () {
-        setColor(this);
-      };
-    }
-  }
-
-  function setColor(color) {
+  function setColor(event) {
     color = event.target.dataset.color;
     if (color) {
       context.strokeStyle = color;
     }
   }
 
-  var allInputs = colorInput.querySelectorAll('input');
-  for (var i = 0, len = allInputs.length; i < len; i++) {
-    if (allInputs[i].classList.contains("colors")) {
-      allInputs[i].addEventListener('click', changeBtnColor);
+  colorInput.addEventListener('click', function (event) {
+    if(event.target.classList.contains('colors')) {
+      setColor(event);
+      changeBtnColor(event);
     }
-  }
+  });
 
   function changeBtnColor(e) {
-    var inputs = document.getElementsByTagName('INPUT');
+    var inputs = colorInput.querySelectorAll('.is-active');
       for (var i = 0; i < inputs.length; i++) {
-        if (inputs[i] != e.target) {
           inputs[i].classList.remove('is-active');
-        }
       }
       e.target.classList.add('is-active');
   }
@@ -104,7 +91,6 @@ function onReady() {
     context.moveTo(mouseX, mouseY);
     mouseX = event.clientX - rect.left;
     mouseY = event.clientY - rect.top;
-    setColor(color);
     context.lineTo(mouseX, mouseY);
     context.lineWidth = 4;
     context.stroke();
