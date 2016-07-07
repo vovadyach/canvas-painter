@@ -19,7 +19,16 @@ input:hover {
 
 .is-active {
     background-color: #333;
-    color: #cccccc;
+    color: #ffffff;
+}
+.is-active:hover {
+    background-color: #444;
+    color: #ffffff;
+
+}
+
+canvas {
+    cursor: crosshair;
 }
 
 #clear {

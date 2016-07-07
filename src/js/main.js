@@ -32,13 +32,14 @@ function onReady() {
   document.body.appendChild(clearBtn);
 
   var element = document.createElement("div");
-  element.setAttribute('class', 'color-input');
+  element.setAttribute('id', 'color-input');
   document.getElementsByClassName('container')[0].appendChild(element);
 
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode1);
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode2);
-  document.getElementsByClassName('color-input')[0].appendChild(buttonnode3);
-  document.getElementsByClassName('color-input')[0].appendChild(clearBtn);
+  var colorInput = document.getElementById('color-input');
+  colorInput.appendChild(buttonnode1);
+  colorInput.appendChild(buttonnode2);
+  colorInput.appendChild(buttonnode3);
+  colorInput.appendChild(clearBtn);
 
   var canvas = document.getElementById('canvas');
   var rect = canvas.getBoundingClientRect(),
@@ -47,25 +48,21 @@ function onReady() {
       context = canvas.getContext("2d"),
       color;
 
-
   var clearButton = document.getElementById('clear');
   clearButton.onclick = clearCanvasArea;
 
   function clearCanvasArea() {
     context.clearRect(0,0,1400, 800);
-    context.strokeStyle = '#000';
+    //context.strokeStyle = '#000';
   }
 
   var inputColors = document.getElementsByClassName('colors');
   getColor(inputColors);
 
-  canvas.addEventListener("mousedown", onMouseDown);
-
-
   function getColor(colors) {
     for (var i = 0, len = colors.length; i < len; i++) {
-      colors[i].onclick = function (event) {
-        setColor(event);
+      colors[i].onclick = function () {
+        setColor(this);
       };
     }
   }
@@ -77,6 +74,24 @@ function onReady() {
     }
   }
 
+  var allInputs = colorInput.querySelectorAll('input');
+  for (var i = 0, len = allInputs.length; i < len; i++) {
+    if (allInputs[i].classList.contains("colors")) {
+      allInputs[i].addEventListener('click', changeBtnColor);
+    }
+  }
+
+  function changeBtnColor(e) {
+    var inputs = document.getElementsByTagName('INPUT');
+      for (var i = 0; i < inputs.length; i++) {
+        if (inputs[i] != e.target) {
+          inputs[i].classList.remove('is-active');
+        }
+      }
+      e.target.classList.add('is-active');
+  }
+
+  canvas.addEventListener("mousedown", onMouseDown);
   function onMouseDown(event) {
     mouseX = event.clientX - rect.left;
     mouseY = event.clientY - rect.top;
@@ -91,7 +106,7 @@ function onReady() {
     mouseY = event.clientY - rect.top;
     setColor(color);
     context.lineTo(mouseX, mouseY);
-    context.lineWidth = 3;
+    context.lineWidth = 4;
     context.stroke();
   }
 
@@ -102,262 +117,3 @@ function onReady() {
 }
 
 window.onload = onReady;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*"use strict";
- var context = document.getElementById('sheet').getContext("2d");
- var canvas = document.getElementById('sheet');
- context = canvas.getContext("2d");
- var red = '#ff0000',
- green = '#3dae49',
- blue = '#009cc5';
- context.lineJoin = "round";
- context.lineWidth = 5;
-
- var clickX = [];
- var clickY = [];
- var clickDrag = [];
- var paint;
-
- var buttonnode = document.createElement('input');
- buttonnode.setAttribute('class', 'red');
- buttonnode.setAttribute('data-color', '#ff0000');
- buttonnode.setAttribute('type','button');
- buttonnode.setAttribute('value','Red');
- document.body.appendChild(buttonnode);
-
- buttonnode.addEventListener( "click" , function() {
- context.strokeStyle = red;
- });
-
- /!**
- * Add information where the user clicked at.
- * @param {number} x
- * @param {number} y
- * @return {boolean} dragging
- *!/
- function addClick(x, y, dragging) {
- clickX.push(x);
- clickY.push(y);
- clickDrag.push(dragging);
- }
-
- /!**
- * Redraw the complete canvas.
- *!/
- function redraw() {
- // Clears the canvas
- context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-
- for (var i = 0; i < clickX.length; i += 1) {
- if (!clickDrag[i] && i == 0) {
- context.beginPath();
- context.moveTo(clickX[i], clickY[i]);
- context.stroke();
- } else if (!clickDrag[i] && i > 0) {
- context.closePath();
-
- context.beginPath();
- context.moveTo(clickX[i], clickY[i]);
- context.stroke();
- } else {
- context.lineTo(clickX[i], clickY[i]);
- context.stroke();
- }
- }
- }
-
- /!**
- * Draw the newly added point.
- * @return {void}
- *!/
- function drawNew() {
- var i = clickX.length - 1
- if (!clickDrag[i]) {
- if (clickX.length == 0) {
- context.beginPath();
- context.moveTo(clickX[i], clickY[i]);
- context.stroke();
- } else {
- context.closePath();
-
- context.beginPath();
- context.moveTo(clickX[i], clickY[i]);
- context.stroke();
- }
- } else {
- context.lineTo(clickX[i], clickY[i]);
- context.stroke();
- }
- }
-
- function mouseDownEventHandler(e) {
- paint = true;
- var x = e.pageX - canvas.offsetLeft;
- var y = e.pageY - canvas.offsetTop;
- if (paint) {
- addClick(x, y, false);
- drawNew();
- }
- }
-
- function touchstartEventHandler(e) {
- paint = true;
- if (paint) {
- addClick(e.touches[0].pageX - canvas.offsetLeft, e.touches[0].pageY - canvas.offsetTop, false);
- drawNew();
- }
- }
-
- function mouseUpEventHandler(e) {
- context.closePath();
- paint = false;
- }
-
- function mouseMoveEventHandler(e) {
- var x = e.pageX - canvas.offsetLeft;
- var y = e.pageY - canvas.offsetTop;
- if (paint) {
- addClick(x, y, true);
- drawNew();
- }
- }
-
- function touchMoveEventHandler(e) {
- if (paint) {
- addClick(e.touches[0].pageX - canvas.offsetLeft, e.touches[0].pageY - canvas.offsetTop, true);
- drawNew();
- }
- }
-
- function setUpHandler(isMouseandNotTouch, detectEvent) {
- removeRaceHandlers();
- if (isMouseandNotTouch) {
- canvas.addEventListener('mouseup', mouseUpEventHandler);
- canvas.addEventListener('mousemove', mouseMoveEventHandler);
- canvas.addEventListener('mousedown', mouseDownEventHandler);
- mouseDownEventHandler(detectEvent);
- } else {
- canvas.addEventListener('touchstart', touchstartEventHandler);
- canvas.addEventListener('touchmove', touchMoveEventHandler);
- canvas.addEventListener('touchend', mouseUpEventHandler);
- touchstartEventHandler(detectEvent);
- }
- }
-
- function mouseWins(e) {
- setUpHandler(true, e);
- }
-
- function touchWins(e) {
- setUpHandler(false, e);
- }
-
- function removeRaceHandlers() {
- canvas.removeEventListener('mousedown', mouseWins);
- canvas.removeEventListener('touchstart', touchWins);
- }
-
- canvas.addEventListener('mousedown', mouseWins);
- canvas.addEventListener('touchstart', touchWins);*/
-
-//x = 100,
-//y = 100;
-//canvas.addEventListener("mousemove", function(event) {
-//    var rect = canvas.getBoundingClientRect(),
-//        x = event.clientX - rect.left,
-//        y = event.clientY - rect.top;
-//    if ( x >= btn.x && x <= btn.x + btn.w &&
-//        y >= btn.y && y <= btn.y + btn.h) {
-//        btn.selected = !btn.selected;
-//        canvas.style.cursor = "pointer";
-//    } else {
-//        canvas.style.cursor = "auto";
-//    }
-//});
-// document.body.addEventListener("keydown", function(event) {
-//    switch (event.keyCode) {
-//        case 37: //left
-//            x--;
-//            draw();
-//            break;
-//        case 39: //right
-//            x++;
-//            draw();
-//            break;
-//        case 38: //up
-//            y--;
-//            draw();
-//            break;
-//        case 40: //down
-//            y++;
-//            draw();
-//            break;
-//    }
-//});
-//
-//function draw() {
-//    context.clearRect(0, 0, canvas.width, canvas.height);
-//    context.beginPath();
-//    context.arc(x, y, 20, 0, Math.PI * 2);
-//    context.fill();
-//}
-//
-//btn = {
-//    x: 100,
-//    y: 100,
-//    w: 100,
-//    h: 50,
-//    selected: true
-//};
-//
-//drawButton();
-//function drawButton() {
-//context.fillStyle = btn.selected ? "red" : "grey";
-//context.fillRect(btn.x, btn.y, btn.w, btn.h);
-//}
-//canvas.addEventListener("click", function(event) {
-//    var rect = canvas.getBoundingClientRect(),
-//        x = event.clientX - rect.left,
-//        y = event.clientY - rect.top;
-//    if ( x >= btn.x && x <= btn.x + btn.w &&
-//        y >= btn.y && y <= btn.y + btn.h) {
-//        btn.selected = !btn.selected;
-//        drawButton();
-//    }
-//});
