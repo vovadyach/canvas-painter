@@ -3,7 +3,7 @@ import ButtonsManager from 'managers/buttons.js';
 
 function onReady() {
     let buttonsManager = new ButtonsManager();
-    let parent = document.body;
+    let  parent = document.body;
 
     buttonsManager
         .add(ButtonFactory.create('colors', '#c82124', 'Red'))
