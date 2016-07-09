@@ -1,5 +1,5 @@
-import ButtonFactory from 'factories/button.js';
-import ButtonsManager from 'managers/buttons.js';
+import ButtonFactory from 'factories/button'
+import ButtonsManager from 'managers/buttons';
 
 function onReady() {
     let buttonsManager = new ButtonsManager();
@@ -13,7 +13,7 @@ function onReady() {
         .add(ButtonFactory.create('colors', '#009cc5', 'Blue'))
         .applyTo(parent);
 
-    var clearBtn = document.createElement('input');
+    let clearBtn = document.createElement('input');
     clearBtn.setAttribute('id', 'clear');
     clearBtn.setAttribute('type', 'button');
     clearBtn.setAttribute('value', 'Clear');

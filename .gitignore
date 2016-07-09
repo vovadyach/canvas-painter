@@ -45,8 +45,15 @@ jspm_packages
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/dictionaries
-.idea/vcs.xml
+.idea/vcs.xmlg
 .idea/jsLibraryMappings.xml
+
+.idea/canvas-painter.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/watcherTasks.xml
+
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
