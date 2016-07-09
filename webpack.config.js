@@ -9,9 +9,9 @@ module.exports = {
     },
     module: {
         loaders: [
-            {   test: path.join(__dirname, 'es6'),
+            {   test: path.join(__dirname, 'js'),
                 loader: 'babel-loader'
-            }e
+            }
         ]
     }
 };
