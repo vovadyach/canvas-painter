@@ -44,20 +44,14 @@
 /* 0 */
 /***/ function(module, exports) {
 
-	import ButtonFactory from 'factories/button'
+	import ButtonFactory from 'factories/button';
 	import ButtonsManager from 'managers/buttons';
 
 	function onReady() {
 	    let buttonsManager = new ButtonsManager();
-	    let  parent = document.body;
+	    let parent = document.body;
 
-	    buttonsManager
-	        .add(ButtonFactory.create('colors', '#c82124', 'Red'))
-	        .applyLastTo(parent)
-	        .add(ButtonFactory.create('colors', '#3dae49', 'Green'))
-	        .applyTo(parent)
-	        .add(ButtonFactory.create('colors', '#009cc5', 'Blue'))
-	        .applyTo(parent);
+	    buttonsManager.add(ButtonFactory.create('colors', '#c82124', 'Red')).applyLastTo(parent).add(ButtonFactory.create('colors', '#3dae49', 'Green')).applyTo(parent).add(ButtonFactory.create('colors', '#009cc5', 'Blue')).applyTo(parent);
 
 	    let clearBtn = document.createElement('input');
 	    clearBtn.setAttribute('id', 'clear');

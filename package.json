@@ -4,7 +4,7 @@
   "description": "This is a simple painter which allows us to draw in the viewport.",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/.bin/webpack-dev-server --content-base app"
+    "start": "node node_modules/.bin/webpack-dev-server --content-base src"
   },
   "repository": {
     "type": "git",

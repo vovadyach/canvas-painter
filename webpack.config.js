@@ -1,4 +1,4 @@
-var path = require('path');
+var webpack = require('webpack');
 
 module.exports = {
     context: __dirname + '/src',
@@ -9,9 +9,8 @@ module.exports = {
     },
     module: {
         loaders: [
-            {   test: path.join(__dirname, 'js'),
-                loader: 'babel-loader'
-            }
+            {   test: /\.js$/, loader: 'babel', exclude: /node-modules/ },
+            {   test: /\.scss$/, loader: 'style!css!scss', exclude: /node-modules/ }
         ]
     }
 };
