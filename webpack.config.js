@@ -11,7 +11,7 @@ module.exports = {
         loaders: [
             {   test: path.join(__dirname, 'es6'),
                 loader: 'babel-loader'
-            }
+            }e
         ]
     }
 };
