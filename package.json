@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node node_modules/.bin/webpack-dev-server --content-base src",
-    "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev",
-    "compile": "babel --presets es2015,stage-0 -d lib/ dist/"
-
+    "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev"
   },
   "repository": {
     "type": "git",
