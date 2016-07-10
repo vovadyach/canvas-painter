@@ -46,11 +46,11 @@
 
 	'use strict';
 
-	var _button = __webpack_require__(1);
+	var _button = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"factories/button\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _buttons = __webpack_require__(2);
+	var _buttons = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"managers/buttons\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 
 	var _buttons2 = _interopRequireDefault(_buttons);
 
@@ -144,112 +144,6 @@
 	}
 
 	window.onload = onReady;
-
-/***/ },
-/* 1 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ButtonFactory = function () {
-	    function ButtonFactory() {
-	        _classCallCheck(this, ButtonFactory);
-	    }
-
-	    _createClass(ButtonFactory, [{
-	        key: 'construct',
-	        value: function construct() {}
-	    }], [{
-	        key: 'create',
-	        value: function create(className, color, buttonName) {
-	            var button = document.createElement('input');
-
-	            button.setAttribute('type', 'button');
-	            button.setAttribute('class', className);
-	            button.setAttribute('data-color', color);
-	            button.setAttribute('value', buttonName);
-
-	            return button;
-	        }
-	    }, {
-	        key: 'createFuncButton',
-	        value: function createFuncButton(className, buttonName) {
-	            var button = document.createElement('input');
-
-	            button.setAttribute('type', 'button');
-	            button.setAttribute('class', className);
-	            button.setAttribute('value', buttonName);
-
-	            return button;
-	        }
-	    }]);
-
-	    return ButtonFactory;
-	}();
-
-	exports.ButtonFactory = ButtonFactory;
-
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
-
-	"use strict";
-
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-	var ButtonsManager = function () {
-	    function ButtonsManager() {
-	        _classCallCheck(this, ButtonsManager);
-	    }
-
-	    _createClass(ButtonsManager, [{
-	        key: "construct",
-	        value: function construct() {
-	            this.buttons = [];
-	        }
-	    }, {
-	        key: "add",
-	        value: function add(button) {
-	            if (this.buttons.indexOf(button) !== -1) return this;
-
-	            this.buttons.push(button);
-
-	            return this;
-	        }
-	    }, {
-	        key: "applyLastTo",
-	        value: function applyLastTo(parent) {
-	            if (!this.buttons.length) return this;
-
-	            this.applyTo(this.buttons[this.buttons.length - 1], parent);
-	        }
-	    }, {
-	        key: "applyTo",
-	        value: function applyTo(element, parent) {
-	            parent.appendChild(element);
-
-	            return this;
-	        }
-	    }]);
-
-	    return ButtonsManager;
-	}();
-
-	exports.ButtonsManager = ButtonsManager;
 
 /***/ }
 /******/ ]);

@@ -1,32 +1,26 @@
+var path = require('path');
 var webpack = require('webpack');
 
 module.exports = {
     context: __dirname + '/src',
     entry: './js/main.js',
     output: {
-        path: __dirname + '/src',
+        path: __dirname + '/dist',
         filename: 'bundle.js'
     },
 
-    // plugins: [
-    //     new webpack.DefinePlugin({
-    //         ON_TEST: process.env.NODE_ENV === 'test'
-    //     })
-    // ],
-
+    devServer: {
+        inline: true,
+        port: 1111
+    },
     module: {
         loaders: [
-            {   test: /\.js$/, loader: 'babel', exclude: /node-modules/ },
-            {   test: /\.sass$/, loader: 'style!css!sass', exclude: /node-modules/ }
+            {   test: /\.js$/, exclude: /node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    plugins: ['transform-runtime']
+                }
+            }
         ]
     }
 };
-
-// if (process.env.NODE_ENV === 'production') {
-//     config.output.path = __dirname + '/dist';
-//     config.plugins.push(new webpack.optimize.UglifyJsPlugin());
-//     config.devtool = 'source-map';
-//
-// }
-
-//module.exports =  config;
