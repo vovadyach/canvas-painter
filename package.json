@@ -1,10 +1,12 @@
 {
   "name": "canvas-painter",
   "version": "1.3.0",
-  "description": "This is a simple painter which allows us to draw in the viewport.",
+    "description": "This is a simple painter which allows us to draw in the viewport.",
   "main": "index.js",
   "scripts": {
-    "start": "node node_modules/.bin/webpack-dev-server --content-base src"
+    "start": "node node_modules/.bin/webpack-dev-server --content-base src",
+    "validate-webpack:dev": "webpack-validator webpack.config.js --env.dev"
+
   },
   "repository": {
     "type": "git",
@@ -20,9 +22,19 @@
   "devDependencies": {
     "babel-core": "^6.10.4",
     "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-2": "^6.11.0",
+    "css-loader": "^0.23.1",
     "lodash": "^4.13.1",
+    "node-sass": "^3.8.0",
     "nodemon": "1.9.2",
+    "sass-loader": "^4.0.0",
+    "scss-loader": "0.0.1",
+    "style-loader": "^0.13.1",
+    "stylus": "^0.54.5",
+    "stylus-loader": "^2.1.1",
     "webpack": "1.13.1",
-    "webpack-dev-server": "1.14.1"
+    "webpack-dev-server": "1.14.1",
+    "webpack-validator": "^2.2.2"
   }
 }

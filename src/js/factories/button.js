@@ -12,11 +12,10 @@ class ButtonFactory {
         return button;
     }
     
-    static create(className, buttonName) {
+    static createFuncButton(className, buttonName) {
         let button = document.createElement('input');
 
         button.setAttribute('type', 'button');
-        button.setAttribute('class', className);
         button.setAttribute('class', className);
         button.setAttribute('value', buttonName);
 

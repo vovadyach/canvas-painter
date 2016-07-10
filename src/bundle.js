@@ -42,28 +42,39 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	import ButtonFactory from 'factories/button';
-	import ButtonsManager from 'managers/buttons';
+	'use strict';
+
+	var _button = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"factories/button\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _button2 = _interopRequireDefault(_button);
+
+	var _buttons = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"managers/buttons\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+	var _buttons2 = _interopRequireDefault(_buttons);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	function onReady() {
-	    let buttonsManager = new ButtonsManager();
-	    let parent = document.body;
+	    var buttonsManager = new _buttons2.default();
+	    var parent = document.body;
 
-	    buttonsManager.add(ButtonFactory.create('colors', '#c82124', 'Red')).applyLastTo(parent).add(ButtonFactory.create('colors', '#3dae49', 'Green')).applyTo(parent).add(ButtonFactory.create('colors', '#009cc5', 'Blue')).applyTo(parent);
-
-	    let clearBtn = document.createElement('input');
-	    clearBtn.setAttribute('id', 'clear');
-	    clearBtn.setAttribute('type', 'button');
-	    clearBtn.setAttribute('value', 'Clear');
-	    document.body.appendChild(clearBtn);
+	    buttonsManager.add(_button2.default.create('colors', '#c82124', 'Red')).applyLastTo(parent).add(_button2.default.create('colors', '#3dae49', 'Green')).applyTo(parent).add(_button2.default.create('colors', '#009cc5', 'Blue')).applyTo(parent).add(_button2.default.createFuncButton('clear-button', 'Clear')).applyTo(parent);
 
 	    var element = document.createElement("div");
 	    element.setAttribute('id', 'color-input');
 	    document.getElementsByClassName('container')[0].appendChild(element);
 
-	    buttonsManager.buttons.forEach(button => element.appendChild(button));
+	    buttonsManager.buttons.forEach(function (button) {
+	        return element.appendChild(button);
+	    });
+
+	    // let clearBtn = document.createElement('input');
+	    // clearBtn.setAttribute('id', 'clear');
+	    // clearBtn.setAttribute('type', 'button');
+	    // clearBtn.setAttribute('value', 'Clear');
+	    // document.body.appendChild(clearBtn);
 
 	    //var colorInput = document.getElementById('color-input');
 	    //colorInput.appendChild(buttonnode1);

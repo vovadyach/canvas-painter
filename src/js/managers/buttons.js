@@ -16,7 +16,6 @@ class ButtonsManager {
 
         this.applyTo(this.buttons[this.buttons.length - 1], parent);
     }
-
     applyTo(element, parent) {
         parent.appendChild(element);
 

@@ -1,5 +1,6 @@
-import ButtonFactory from 'factories/button'
+import ButtonFactory from 'factories/button';
 import ButtonsManager from 'managers/buttons';
+
 
 function onReady() {
     let buttonsManager = new ButtonsManager();
@@ -11,19 +12,23 @@ function onReady() {
         .add(ButtonFactory.create('colors', '#3dae49', 'Green'))
         .applyTo(parent)
         .add(ButtonFactory.create('colors', '#009cc5', 'Blue'))
+        .applyTo(parent)
+        .add(ButtonFactory.createFuncButton('clear-button', 'Clear'))
         .applyTo(parent);
-
-    let clearBtn = document.createElement('input');
-    clearBtn.setAttribute('id', 'clear');
-    clearBtn.setAttribute('type', 'button');
-    clearBtn.setAttribute('value', 'Clear');
-    document.body.appendChild(clearBtn);
 
     var element = document.createElement("div");
     element.setAttribute('id', 'color-input');
     document.getElementsByClassName('container')[0].appendChild(element);
 
     buttonsManager.buttons.forEach(button => element.appendChild(button));
+
+    // let clearBtn = document.createElement('input');
+    // clearBtn.setAttribute('id', 'clear');
+    // clearBtn.setAttribute('type', 'button');
+    // clearBtn.setAttribute('value', 'Clear');
+    // document.body.appendChild(clearBtn);
+
+
 
     //var colorInput = document.getElementById('color-input');
     //colorInput.appendChild(buttonnode1);
