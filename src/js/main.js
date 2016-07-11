@@ -18,7 +18,7 @@
  * @author Volodymyr Diachenko <diachenko.vladimir@gmail.com>
  * @version 1.2
  */
-
+require('../styles/styles.scss');
 import ButtonFactory from './factories/button';
 import ButtonsManager from './managers/buttons';
 

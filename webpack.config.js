@@ -9,6 +9,8 @@ module.exports = {
         filename: 'app.bundle.js'
     },
 
+    devtool: "source-map",
+
     devServer: {
         inline: true,
         port: 1111
@@ -16,17 +18,18 @@ module.exports = {
 
     module: {
         loaders: [
-            {   test: /\.js$/, exclude: /node_modules/,
+            {   test: /\.js$/,
+                exclude: /node_modules/,
                 loader: 'babel-loader'
             },
             {
                 test: /\.scss$/,
-                loaders: ["style", "css", "sass"]
+                loaders: ["style", "css", "sass"],
+                include: path.join(__dirname, "src"),
+                exclude: /node_modules/
+
             }
         ]
-    },
-
-    classLoader: {
-        includePaths: [path.resolve(__dirname, "./dist/stylesheets")]
     }
+
 };

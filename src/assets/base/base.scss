@@ -30,9 +30,14 @@ input:hover {
 canvas {
     cursor: crosshair;
 }
-
-#clear {
-    margin-top: 8px;
+#color-input {
+    position: relative;
+    max-width: 600px;
+    margin: auto;
+}
+.clear-button {
+    position: absolute;
+    right: 0;
 }
 
 canvas {
@@ -45,9 +50,7 @@ canvas {
     max-width: 1400px;
     margin: 10px auto;
 }
-#clear {
-    float: right;
-}
+
 h1 {
     text-align: center;
 }
