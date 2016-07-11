@@ -81,7 +81,7 @@
 	    var buttonsManager = new _buttons2.default();
 	    var parent = document.body;
 
-	    buttonsManager.add(_button2.default.create('colors', '#c82124', 'Red')).applyLastTo(parent).add(_button2.default.create('colors', '#3dae49', 'Green')).applyTo(parent).add(_button2.default.create('colors', '#009cc5', 'Blue')).applyTo(parent).add(_button2.default.createFuncButton('clear-button', 'Clear')).applyTo(parent);
+	    buttonsManager.add(_button2.default.create('colors', '#c82124', 'Red')).applyLastTo(parent).add(_button2.default.create('colors', '#3dae49', 'Green')).applyLastTo(parent).add(_button2.default.create('colors', '#009cc5', 'Blue')).applyLastTo(parent).add(_button2.default.createFuncButton('clear-button', 'Clear')).applyLastTo(parent);
 
 	    var element = document.createElement("div");
 	    element.setAttribute('id', 'color-input');
@@ -110,43 +110,43 @@
 	        context = canvas.getContext("2d"),
 	        color;
 
-	    var clearButton = document.getElementById('clear');
-	    clearButton.onclick = clearCanvasArea;
+	    //var clearButton = document.getElementById('clear');
+	    //clearButton.onclick = clearCanvasArea;
 
-	    function clearCanvasArea() {
-	        context.clearRect(0, 0, 1400, 800);
-	        context.strokeStyle = '#000';
-	    }
-
-	    function setColor(event) {
-	        color = event.target.dataset.color;
-	        if (color) {
-	            context.strokeStyle = color;
-	        }
-	    }
-
-	    colorInput.addEventListener('click', function (event) {
-	        if (event.target.classList.contains('colors')) {
-	            setColor(event);
-	            changeBtnColor(event);
-	        }
-	    });
-
-	    function changeBtnColor(e) {
-	        var inputs = colorInput.querySelectorAll('.is-active');
-	        for (var i = 0; i < inputs.length; i++) {
-	            inputs[i].classList.remove('is-active');
-	        }
-	        e.target.classList.add('is-active');
-	    }
-
-	    canvas.addEventListener("mousedown", onMouseDown);
-	    function onMouseDown(event) {
-	        mouseX = event.clientX - rect.left;
-	        mouseY = event.clientY - rect.top;
-	        canvas.addEventListener("mousemove", onMouseMove);
-	        document.body.addEventListener('mouseup', onMouseUp);
-	    }
+	    //function clearCanvasArea() {
+	    //    context.clearRect(0, 0, 1400, 800);
+	    //    context.strokeStyle = '#000';
+	    //}
+	    //
+	    //function setColor(event) {
+	    //    color = event.target.dataset.color;
+	    //    if (color) {
+	    //        context.strokeStyle = color;
+	    //    }
+	    //}
+	    //
+	    //colorInput.addEventListener('click', function (event) {
+	    //    if (event.target.classList.contains('colors')) {
+	    //        setColor(event);
+	    //        changeBtnColor(event);
+	    //    }
+	    //});
+	    //
+	    //function changeBtnColor(e) {
+	    //    var inputs = colorInput.querySelectorAll('.is-active');
+	    //    for (var i = 0; i < inputs.length; i++) {
+	    //        inputs[i].classList.remove('is-active');
+	    //    }
+	    //    e.target.classList.add('is-active');
+	    //}
+	    //
+	    //canvas.addEventListener("mousedown", onMouseDown);
+	    //function onMouseDown(event) {
+	    //    mouseX = event.clientX - rect.left;
+	    //    mouseY = event.clientY - rect.top;
+	    //    canvas.addEventListener("mousemove", onMouseMove);
+	    //    document.body.addEventListener('mouseup', onMouseUp);
+	    //}
 
 	    function onMouseMove(event) {
 	        context.beginPath();
