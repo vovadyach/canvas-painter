@@ -42,7 +42,6 @@ function onReady() {
 
     buttonsManager.buttons.forEach(button => element.appendChild(button));
 
-
     var canvas = document.getElementById('canvas');
     var rect = canvas.getBoundingClientRect(),
         mouseX,

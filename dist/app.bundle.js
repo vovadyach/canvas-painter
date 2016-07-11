@@ -44,13 +44,21 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	__webpack_require__(1);
+	(function webpackMissingModule() { throw new Error("Cannot find module \"test\""); }());
+
+
+/***/ },
+/* 1 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 
-	var _button = __webpack_require__(1);
+	var _button = __webpack_require__(2);
 
 	var _button2 = _interopRequireDefault(_button);
 
-	var _buttons = __webpack_require__(2);
+	var _buttons = __webpack_require__(3);
 
 	var _buttons2 = _interopRequireDefault(_buttons);
 
@@ -90,18 +98,6 @@
 	    buttonsManager.buttons.forEach(function (button) {
 	        return element.appendChild(button);
 	    });
-
-	    // let clearBtn = document.createElement('input');
-	    // clearBtn.setAttribute('id', 'clear');
-	    // clearBtn.setAttribute('type', 'button');
-	    // clearBtn.setAttribute('value', 'Clear');
-	    // document.body.appendChild(clearBtn);
-
-	    //var colorInput = document.getElementById('color-input');
-	    //colorInput.appendChild(buttonnode1);
-	    //colorInput.appendChild(buttonnode2);
-	    //colorInput.appendChild(buttonnode3);
-	    //colorInput.appendChild(clearBtn);
 
 	    var canvas = document.getElementById('canvas');
 	    var rect = canvas.getBoundingClientRect(),
@@ -167,7 +163,7 @@
 	window.onload = onReady;
 
 /***/ },
-/* 1 */
+/* 2 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -216,7 +212,7 @@
 	exports.default = ButtonFactory;
 
 /***/ },
-/* 2 */
+/* 3 */
 /***/ function(module, exports) {
 
 	"use strict";

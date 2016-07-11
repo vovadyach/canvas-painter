@@ -13,11 +13,20 @@ module.exports = {
         inline: true,
         port: 1111
     },
+
     module: {
         loaders: [
             {   test: /\.js$/, exclude: /node_modules/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.scss$/,
+                loaders: ["style", "css", "sass"]
             }
         ]
+    },
+
+    classLoader: {
+        includePaths: [path.resolve(__dirname, "./dist/stylesheets")]
     }
 };
