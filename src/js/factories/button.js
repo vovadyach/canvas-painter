@@ -1,5 +1,5 @@
 class ButtonFactory {
-    construct() {}
+    constructor() {}
 
     static create(className, color, buttonName) {
         let button = document.createElement('input');
@@ -23,4 +23,4 @@ class ButtonFactory {
     }
 }
 
-export {ButtonFactory};
+export default ButtonFactory;

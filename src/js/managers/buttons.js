@@ -1,5 +1,5 @@
 class ButtonsManager {
-    construct() {
+    constructor() {
         this.buttons = [];
     }
 
@@ -15,13 +15,13 @@ class ButtonsManager {
         if (!this.buttons.length) return this;
 
         this.applyTo(this.buttons[this.buttons.length - 1], parent);
+        return this;
     }
     applyTo(element, parent) {
         parent.appendChild(element);
 
         return this;
     }
-
 }
 
-export {ButtonsManager};
+export default ButtonsManager;
