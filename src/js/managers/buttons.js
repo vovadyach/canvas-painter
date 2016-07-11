@@ -15,6 +15,7 @@ class ButtonsManager {
         if (!this.buttons.length) return this;
 
         this.applyTo(this.buttons[this.buttons.length - 1], parent);
+
         return this;
     }
 
@@ -23,6 +24,7 @@ class ButtonsManager {
 
         return this;
     }
+
 }
 
 export default ButtonsManager;

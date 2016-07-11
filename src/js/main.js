@@ -42,19 +42,6 @@ function onReady() {
 
     buttonsManager.buttons.forEach(button => element.appendChild(button));
 
-    // let clearBtn = document.createElement('input');
-    // clearBtn.setAttribute('id', 'clear');
-    // clearBtn.setAttribute('type', 'button');
-    // clearBtn.setAttribute('value', 'Clear');
-    // document.body.appendChild(clearBtn);
-
-
-
-    //var colorInput = document.getElementById('color-input');
-    //colorInput.appendChild(buttonnode1);
-    //colorInput.appendChild(buttonnode2);
-    //colorInput.appendChild(buttonnode3);
-    //colorInput.appendChild(clearBtn);
 
     var canvas = document.getElementById('canvas');
     var rect = canvas.getBoundingClientRect(),
